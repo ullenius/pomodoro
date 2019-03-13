@@ -8,13 +8,17 @@ var number = 0;
 
 function bigTimer() {
   if (number != 0) {
+    var numberClone = number;
     printTimeLeft();
-    window.setTimeout(printMessage,number);
+    console.log("numberclone = " + numberClone);
+    window.setTimeout(printMessage,numberClone);
   }
 }
 
 function printMessage() {
   alert("Time is up! Time for a break :)");
+  var timer = document.getElementById("timer");
+  timer.innerHTML = "<strong>Time is up!</strong>"; // needs refactoring
 }
 
 // recursive method
@@ -25,7 +29,12 @@ function printTimeLeft() {
     number -= MINUTE_IN_MILLISECONDS;
     var timer = document.getElementById("timer");
     console.log("timer contents: " + timer.innerHTML);
-    timer.innerHTML = "Time left <strong>" + number/MINUTE_IN_MILLISECONDS+"</strong> minutes";
+    var timeLeft = number/MINUTE_IN_MILLISECONDS;
+    var displayTime = timeLeft;
+    if (timeLeft < 1) {
+	displayTime = "< 1";
+    }
+    timer.innerHTML = "Time left <strong>" + displayTime + "</strong> minute(s)";
     console.log("number: " + number);
     window.setTimeout(printTimeLeft,MINUTE_IN_MILLISECONDS);
   }
