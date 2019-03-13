@@ -7,8 +7,10 @@ var MINUTE_IN_MILLISECONDS = 60000;
 var number = 0;
 
 function bigTimer() {
-  printTimeLeft();
-  setTimeout(printMessage,number);
+  if (number != 0) {
+    printTimeLeft();
+    setTimeout(printMessage,number);
+  }
 }
 
 function printMessage() {
