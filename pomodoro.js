@@ -9,7 +9,7 @@ var number = 0;
 function bigTimer() {
   if (number != 0) {
     printTimeLeft();
-    setTimeout(printMessage,number);
+    window.setTimeout(printMessage,number);
   }
 }
 
@@ -25,9 +25,9 @@ function printTimeLeft() {
     number -= MINUTE_IN_MILLISECONDS;
     var timer = document.getElementById("timer");
     console.log("timer contents: " + timer.innerHTML);
-    timer.innerHTML = "time left <strong>" + number/MINUTE_IN_MILLISECONDS+"</strong> minutes";
+    timer.innerHTML = "Time left <strong>" + number/MINUTE_IN_MILLISECONDS+"</strong> minutes";
     console.log("number: " + number);
-    setTimeout(printTimeLeft,MINUTE_IN_MILLISECONDS);
+    window.setTimeout(printTimeLeft,MINUTE_IN_MILLISECONDS);
   }
 
 }
