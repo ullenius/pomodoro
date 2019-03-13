@@ -1,5 +1,8 @@
 # pomodoro
-Pomodoro App written in Vanilla Javascript
+Pomodoro App written in Vanilla Javascript. 
+
+> *"The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s"* - [wikipedia](https://en.wikipedia.org/wiki/Pomodoro_Technique)
+
 
 ## Usage
 1. User inputs time in minutes
