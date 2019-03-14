@@ -3,7 +3,7 @@
 // when timers hits 0 an alert pops up
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-03-13
 
-var MINUTE_IN_MILLISECONDS = 60000;
+const MINUTE_IN_MILLISECONDS = 60000;
 var number = 0;
 var input = prompt("Please enter length of pomodoro in minutes:");
 
