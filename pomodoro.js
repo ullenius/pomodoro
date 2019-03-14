@@ -7,12 +7,14 @@ var MINUTE_IN_MILLISECONDS = 60000;
 var number = 0;
 var input = prompt("Please enter length of pomodoro in minutes:");
 
-if (!isNaN(input)) { // bug if empty String, equals 0 as number
+if (isNaN(input)) {
+  alert("Error: Input is not a number!");
+} else if (input <= 0) {
+  alert("Error: Length is too short");
+} else {
   number = input*MINUTE_IN_MILLISECONDS; // global variable
   bigTimer();
   console.log(MINUTE_IN_MILLISECONDS * input); // debug
-} else {
-  alert("Error: Input is not a number!");
 }
 
 function bigTimer() {
