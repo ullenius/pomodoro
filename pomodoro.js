@@ -5,10 +5,20 @@
 
 var MINUTE_IN_MILLISECONDS = 60000;
 var number = 0;
+var input = prompt("Please enter length of pomodoro in minutes:");
+
+if (!isNaN(input)) { // bug if empty String, equals 0 as number
+  number = input*MINUTE_IN_MILLISECONDS; // global variable
+  bigTimer();
+  console.log(MINUTE_IN_MILLISECONDS * input); // debug
+} else {
+  alert("Error: Input is not a number!");
+}
 
 function bigTimer() {
+  var numberClone;
   if (number != 0) {
-    var numberClone = number;
+    numberClone = number;
     printTimeLeft();
     console.log("numberclone = " + numberClone);
     window.setTimeout(printMessage,numberClone);
@@ -16,36 +26,27 @@ function bigTimer() {
 }
 
 function printMessage() {
-  alert("Time is up! Time for a break :)");
   var timer = document.getElementById("timer");
+  alert("Time is up! Time for a break :)");
   timer.innerHTML = "<strong>Time is up!</strong>"; // needs refactoring
 }
 
 // recursive method
 function printTimeLeft() {
+  var timeLeft;
+  var displayTime;
+  var timer = document.getElementById("timer");
   console.log("method is called: " + number); // debug stuff
 
   if (number > 0) {
     number -= MINUTE_IN_MILLISECONDS;
-    var timer = document.getElementById("timer");
-    console.log("timer contents: " + timer.innerHTML);
-    var timeLeft = number/MINUTE_IN_MILLISECONDS;
-    var displayTime = timeLeft;
+    timeLeft = number/MINUTE_IN_MILLISECONDS;
+    displayTime = timeLeft;
     if (timeLeft < 1) {
-	displayTime = "< 1";
+	     displayTime = "< 1";
     }
     timer.innerHTML = "Time left <strong>" + displayTime + "</strong> minute(s)";
-    console.log("number: " + number);
     window.setTimeout(printTimeLeft,MINUTE_IN_MILLISECONDS);
   }
 
-}
-
-var input = prompt("Please enter length of pomodoro in minutes:");
-if (!isNaN(input)) { // bug if empty String, equals 0 as number
-  number = input*MINUTE_IN_MILLISECONDS; // global variabel
-  bigTimer();
-  console.log(MINUTE_IN_MILLISECONDS*input); // debug
-} else {
-  alert("Error: Input is not a number!");
 }
