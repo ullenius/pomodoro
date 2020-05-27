@@ -13,9 +13,8 @@ function promptInput() {
 
     const result = validateNumber(input);
     if (result.valid === true) {
-        number = input * MINUTE_IN_MILLISECONDS; // global variable
+       // number = input * MINUTE_IN_MILLISECONDS; // global variable
         start(input);
-        console.log(MINUTE_IN_MILLISECONDS * input); // debug
     } else {
         alert("Error: " + result.message);
     }
@@ -44,7 +43,7 @@ function start(time) {
 
     function countdown() {
         console.log(counter - 1);
-        printTimeLeft(counter * MINUTE_IN_MILLISECONDS);
+        printTimeLeft(counter--);
 
         if (counter === 0) {
             clearInterval(id);
@@ -57,10 +56,11 @@ function start(time) {
 function printMessage() {
   var timer = document.getElementById("timer");
   alert("Time is up! Time for a break :)");
-  timer.innerHTML = "<strong>Time is up!</strong>"; // needs refactoring
+  timer.innerHTML = strongTag("Time is up!");
 }
 
 function printTimeLeft(number) {
+  number *= MINUTE_IN_MILLISECONDS;
   var timeLeft;
   var displayTime;
   var timer = document.getElementById("timer");
@@ -69,11 +69,14 @@ function printTimeLeft(number) {
   if (number > 0) {
     number -= MINUTE_IN_MILLISECONDS;
     timeLeft = number/MINUTE_IN_MILLISECONDS;
-    displayTime = timeLeft;
-    if (timeLeft < 1) {
-	     displayTime = "< 1";
-    }
-    timer.innerHTML = "Time left <strong>" + displayTime + "</strong> minute(s)";
-  }
 
+    displayTime = (timeLeft < 1) ? "< 1" : timeLeft;
+
+    timer.innerHTML = "Time left: " + strongTag(displayTime) + " minute(s)";
+  }
 }
+
+function strongTag(text) {
+    return "<strong>" + text + "</strong>";
+}
+
