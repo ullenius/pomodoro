@@ -1,6 +1,6 @@
 // Simple Pomdoro app
 // takes user input and counts down
-// when timers hits 0 an alert pops up
+// when timer hits 0 an alert pops up
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
 "use strict";
 
@@ -9,7 +9,6 @@ window.onload = promptInput;
 
 function promptInput() {
     const input = prompt("Please enter length of pomodoro in minutes:");
-
     const result = validateNumber(input);
     if (result.valid === true) {
         start(input);
@@ -19,7 +18,6 @@ function promptInput() {
 }
 
 function validateNumber(number) {
-
     let result = Object.create(null);
     result.valid = false;
     if (isNaN(number)) {
@@ -35,7 +33,6 @@ function validateNumber(number) {
 }
 
 function start(time) {
-
     let counter = time;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
     const timer = document.getElementById("timer");
@@ -49,17 +46,23 @@ function start(time) {
             printTimeLeft(counter--, timer);
         }
     }
+
+    function printTimeLeft(number) {
+        const displayTime = (number < 1) ? "< 1" : number;
+        const message = "Time left: " + strongTag(displayTime) + " minute(s)";
+        display(message);
+    }
+
+    function printFinishMessage() {
+        alert("Time is up! Time for a break :)");
+        const message = strongTag("Time is up");
+        display(message);
+    }
+
+    function display(html) {
+        timer.innerHTML = html;
+    }
     countdown();
-}
-
-function printTimeLeft(number, timer) {
-    const displayTime = (number < 1) ? "< 1" : number;
-    timer.innerHTML = "Time left: " + strongTag(displayTime) + " minute(s)";
-}
-
-function printFinishMessage(timer) {
-    alert("Time is up! Time for a break :)");
-    timer.innerHTML = strongTag("Time is up!");
 }
 
 function strongTag(text) {
