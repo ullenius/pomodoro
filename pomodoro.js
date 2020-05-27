@@ -1,7 +1,7 @@
 // Simple Pomdoro app
 // takes user input and counts down
 // when timers hits 0 an alert pops up
-// @author Anosh D. Ullenius <anosh@anosh.se> 2019-03-13
+// @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
 
 const MINUTE_IN_MILLISECONDS = 60000;
 var number = 0;
@@ -14,7 +14,8 @@ function promptInput() {
     const result = validateNumber(input);
     if (result.valid === true) {
         number = input * MINUTE_IN_MILLISECONDS; // global variable
-        bigTimer();
+        start(input);
+        //bigTimer();
         console.log(MINUTE_IN_MILLISECONDS * input); // debug
     } else {
         alert("Error: " + result.message);
@@ -37,6 +38,22 @@ function validateNumber(number) {
     return result;
 }
 
+function start(time) {
+
+    let counter = time;
+    const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
+
+    function countdown() {
+        console.log(counter - 1);
+        printTimeLeft(counter * MINUTE_IN_MILLISECONDS);
+
+        if (counter === 0) {
+            clearInterval(id);
+            printMessage();
+        }
+    }
+    countdown();
+}
 
 function bigTimer() {
   var numberClone;
@@ -44,7 +61,7 @@ function bigTimer() {
     numberClone = number;
     printTimeLeft();
     console.log("numberclone = " + numberClone);
-    window.setTimeout(printMessage,numberClone);
+    window.setTimeout(printMessage, numberClone);
   }
 }
 
@@ -54,8 +71,7 @@ function printMessage() {
   timer.innerHTML = "<strong>Time is up!</strong>"; // needs refactoring
 }
 
-// recursive method
-function printTimeLeft() {
+function printTimeLeft(number) {
   var timeLeft;
   var displayTime;
   var timer = document.getElementById("timer");
@@ -69,7 +85,7 @@ function printTimeLeft() {
 	     displayTime = "< 1";
     }
     timer.innerHTML = "Time left <strong>" + displayTime + "</strong> minute(s)";
-    window.setTimeout(printTimeLeft,MINUTE_IN_MILLISECONDS);
+    //window.setTimeout(printTimeLeft,MINUTE_IN_MILLISECONDS);
   }
 
 }
