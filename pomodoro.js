@@ -1,54 +1,71 @@
 // Simple Pomdoro app
-// takes user input and countsdown
-// when timers hits 0 an alert pops up
-// @author Anosh D. Ullenius <anosh@anosh.se> 2019-03-13
+// takes user input and counts down
+// when timer hits 0 an alert pops up
+// @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
+"use strict";
 
 const MINUTE_IN_MILLISECONDS = 60000;
-var number = 0;
-var input = prompt("Please enter length of pomodoro in minutes:");
+window.onload = promptInput;
 
-if (isNaN(input)) {
-  alert("Error: Input is not a number!");
-} else if (input <= 0) {
-  alert("Error: Length is too short");
-} else {
-  number = input*MINUTE_IN_MILLISECONDS; // global variable
-  bigTimer();
-  console.log(MINUTE_IN_MILLISECONDS * input); // debug
-}
-
-function bigTimer() {
-  var numberClone;
-  if (number != 0) {
-    numberClone = number;
-    printTimeLeft();
-    console.log("numberclone = " + numberClone);
-    window.setTimeout(printMessage,numberClone);
-  }
-}
-
-function printMessage() {
-  var timer = document.getElementById("timer");
-  alert("Time is up! Time for a break :)");
-  timer.innerHTML = "<strong>Time is up!</strong>"; // needs refactoring
-}
-
-// recursive method
-function printTimeLeft() {
-  var timeLeft;
-  var displayTime;
-  var timer = document.getElementById("timer");
-  console.log("method is called: " + number); // debug stuff
-
-  if (number > 0) {
-    number -= MINUTE_IN_MILLISECONDS;
-    timeLeft = number/MINUTE_IN_MILLISECONDS;
-    displayTime = timeLeft;
-    if (timeLeft < 1) {
-	     displayTime = "< 1";
+function promptInput() {
+    let input = prompt("Please enter length of pomodoro in minutes:");
+    input = Math.trunc(input);
+    const result = validateNumber(input);
+    if (result.valid === true) {
+        start(input);
+    } else {
+        alert("Error: " + result.message);
     }
-    timer.innerHTML = "Time left <strong>" + displayTime + "</strong> minute(s)";
-    window.setTimeout(printTimeLeft,MINUTE_IN_MILLISECONDS);
-  }
+}
 
+function validateNumber(number) {
+    let result = Object.create(null);
+    result.valid = false;
+    if (Number.isNaN(number)) {
+        result.message = "Input is not a number!";
+    } else if (number <= 0) {
+        result.message = "Length is too short";
+    } else if (number === Infinity) {
+        result.message = "Infinity not supported";
+    } else {
+        result.valid = true;
+    }
+    return result;
+}
+
+function start(time) {
+    let counter = time;
+    const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
+    const timer = document.getElementById("timer");
+
+    function countdown() {
+        console.log(counter); // debug
+        if (counter === 0) {
+            clearInterval(id);
+            printFinishMessage(timer);
+        } else {
+            printTimeLeft(counter--, timer);
+        }
+    }
+
+    function printTimeLeft(number) {
+        const displayTime = (number < 1) ? "< 1" : number;
+        const message = "Time left: " + strongTag(displayTime) + " minute(s)";
+        display(message);
+    }
+
+    function printFinishMessage() {
+        alert("Time is up! Time for a break :)");
+        const message = strongTag("Time is up");
+        display(message);
+    }
+
+    function display(html) {
+        timer.innerHTML = html;
+    }
+    countdown();
+}
+
+function strongTag(text) {
+    return "<strong>" + text + "</strong>";
 }
