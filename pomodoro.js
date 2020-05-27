@@ -4,8 +4,6 @@
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
 
 const MINUTE_IN_MILLISECONDS = 60000;
-var number = 0;
-
 window.onload = promptInput;
 
 function promptInput() {
@@ -47,36 +45,26 @@ function start(time) {
 
         if (counter === 0) {
             clearInterval(id);
-            printMessage();
+            printFinishMessage();
         }
     }
     countdown();
 }
 
-function printMessage() {
-  var timer = document.getElementById("timer");
-  alert("Time is up! Time for a break :)");
-  timer.innerHTML = strongTag("Time is up!");
+function printTimeLeft(number) {
+    var timer = document.getElementById("timer");
+    console.log("method is called: " + number); // debug stuff
+
+    var displayTime = (number < 1) ? "< 1" : number;
+    timer.innerHTML = "Time left: " + strongTag(displayTime) + " minute(s)";
 }
 
-function printTimeLeft(number) {
-  number *= MINUTE_IN_MILLISECONDS;
-  var timeLeft;
-  var displayTime;
-  var timer = document.getElementById("timer");
-  console.log("method is called: " + number); // debug stuff
-
-  if (number > 0) {
-    number -= MINUTE_IN_MILLISECONDS;
-    timeLeft = number/MINUTE_IN_MILLISECONDS;
-
-    displayTime = (timeLeft < 1) ? "< 1" : timeLeft;
-
-    timer.innerHTML = "Time left: " + strongTag(displayTime) + " minute(s)";
-  }
+function printFinishMessage() {
+    var timer = document.getElementById("timer");
+    alert("Time is up! Time for a break :)");
+    timer.innerHTML = strongTag("Time is up!");
 }
 
 function strongTag(text) {
     return "<strong>" + text + "</strong>";
 }
-
