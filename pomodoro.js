@@ -15,7 +15,6 @@ function promptInput() {
     if (result.valid === true) {
         number = input * MINUTE_IN_MILLISECONDS; // global variable
         start(input);
-        //bigTimer();
         console.log(MINUTE_IN_MILLISECONDS * input); // debug
     } else {
         alert("Error: " + result.message);
@@ -55,16 +54,6 @@ function start(time) {
     countdown();
 }
 
-function bigTimer() {
-  var numberClone;
-  if (number != 0) {
-    numberClone = number;
-    printTimeLeft();
-    console.log("numberclone = " + numberClone);
-    window.setTimeout(printMessage, numberClone);
-  }
-}
-
 function printMessage() {
   var timer = document.getElementById("timer");
   alert("Time is up! Time for a break :)");
@@ -85,7 +74,6 @@ function printTimeLeft(number) {
 	     displayTime = "< 1";
     }
     timer.innerHTML = "Time left <strong>" + displayTime + "</strong> minute(s)";
-    //window.setTimeout(printTimeLeft,MINUTE_IN_MILLISECONDS);
   }
 
 }
