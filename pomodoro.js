@@ -1,20 +1,24 @@
 // Simple Pomdoro app
-// takes user input and countsdown
+// takes user input and counts down
 // when timers hits 0 an alert pops up
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-03-13
 
 const MINUTE_IN_MILLISECONDS = 60000;
 var number = 0;
-var input = prompt("Please enter length of pomodoro in minutes:");
 
-if (isNaN(input)) {
-  alert("Error: Input is not a number!");
-} else if (input <= 0) {
-  alert("Error: Length is too short");
-} else {
-  number = input*MINUTE_IN_MILLISECONDS; // global variable
-  bigTimer();
-  console.log(MINUTE_IN_MILLISECONDS * input); // debug
+window.onload = promptInput;
+
+function promptInput() {
+    var input = prompt("Please enter length of pomodoro in minutes:");
+    if (isNaN(input)) {
+    alert("Error: Input is not a number!");
+    } else if (input <= 0) {
+    alert("Error: Length is too short");
+    } else {
+    number = input*MINUTE_IN_MILLISECONDS; // global variable
+    bigTimer();
+    console.log(MINUTE_IN_MILLISECONDS * input); // debug
+    }
 }
 
 function bigTimer() {
