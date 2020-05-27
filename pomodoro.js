@@ -8,7 +8,8 @@ const MINUTE_IN_MILLISECONDS = 60000;
 window.onload = promptInput;
 
 function promptInput() {
-    const input = prompt("Please enter length of pomodoro in minutes:");
+    let input = prompt("Please enter length of pomodoro in minutes:");
+    input = Math.trunc(input);
     const result = validateNumber(input);
     if (result.valid === true) {
         start(input);
@@ -20,7 +21,7 @@ function promptInput() {
 function validateNumber(number) {
     let result = Object.create(null);
     result.valid = false;
-    if (isNaN(number)) {
+    if (Number.isNaN(number)) {
         result.message = "Input is not a number!";
     } else if (number <= 0) {
         result.message = "Length is too short";
