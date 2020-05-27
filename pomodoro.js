@@ -4,7 +4,6 @@
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
 "use strict";
 
-const MINUTE_IN_MILLISECONDS = 60000;
 window.onload = promptInput;
 
 function promptInput() {
@@ -35,6 +34,7 @@ function validateNumber(number) {
 
 function start(time) {
     let counter = time;
+    const MINUTE_IN_MILLISECONDS = 60000;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
     const timer = document.getElementById("timer");
 
