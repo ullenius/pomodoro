@@ -8,7 +8,7 @@ const MINUTE_IN_MILLISECONDS = 60000;
 window.onload = promptInput;
 
 function promptInput() {
-    var input = prompt("Please enter length of pomodoro in minutes:");
+    const input = prompt("Please enter length of pomodoro in minutes:");
 
     const result = validateNumber(input);
     if (result.valid === true) {
@@ -53,7 +53,7 @@ function start(time) {
 }
 
 function printTimeLeft(number, timer) {
-    var displayTime = (number < 1) ? "< 1" : number;
+    const displayTime = (number < 1) ? "< 1" : number;
     timer.innerHTML = "Time left: " + strongTag(displayTime) + " minute(s)";
 }
 
