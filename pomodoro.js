@@ -10,16 +10,33 @@ window.onload = promptInput;
 
 function promptInput() {
     var input = prompt("Please enter length of pomodoro in minutes:");
-    if (isNaN(input)) {
-    alert("Error: Input is not a number!");
-    } else if (input <= 0) {
-    alert("Error: Length is too short");
+
+    const result = validateNumber(input);
+    if (result.valid === true) {
+        number = input * MINUTE_IN_MILLISECONDS; // global variable
+        bigTimer();
+        console.log(MINUTE_IN_MILLISECONDS * input); // debug
     } else {
-    number = input*MINUTE_IN_MILLISECONDS; // global variable
-    bigTimer();
-    console.log(MINUTE_IN_MILLISECONDS * input); // debug
+        alert("Error: " + result.message);
     }
 }
+
+function validateNumber(number) {
+
+    let result = Object.create(null);
+    result.valid = false;
+    if (isNaN(number)) {
+        result.message = "Input is not a number!";
+    } else if (number <= 0) {
+        result.message = "Length is too short";
+    } else if (number === Infinity) {
+        result.message = "Infinity not supported";
+    } else {
+        result.valid = true;
+    }
+    return result;
+}
+
 
 function bigTimer() {
   var numberClone;
