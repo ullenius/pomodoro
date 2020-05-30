@@ -7,14 +7,18 @@
 window.onload = promptInput;
 
 function promptInput() {
-    let input = prompt("Please enter length of pomodoro in minutes:");
-    input = Math.trunc(input);
+    const input = getInput();
     const result = validateNumber(input);
     if (result.valid === true) {
         start(input);
     } else {
         alert("Error: " + result.message);
     }
+}
+
+function getInput() {
+    const input = prompt("Please enter length of pomodoro in minutes:");
+    return Math.trunc(input);
 }
 
 function validateNumber(number) {
