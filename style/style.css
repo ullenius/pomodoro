@@ -5,6 +5,18 @@ body {
 	margin: 0 auto;
 }
 
+button {
+    font-family: inherit;
+    text-transform: uppercase;
+    padding: 2em;
+    border: 0px;
+}
+
+button:hover {
+    background-color: #7f007f;
+    cursor: pointer;
+}
+
 .alarm {
     visibility: hidden;
 }

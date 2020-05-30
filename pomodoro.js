@@ -4,8 +4,6 @@
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
 "use strict";
 
-window.onload = promptInput;
-
 function promptInput() {
     const input = getInput();
     const result = validateNumber(input);

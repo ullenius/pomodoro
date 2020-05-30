@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="author" content="Anosh D. Ullenius">
   <link href="style/style.css" rel="stylesheet" />
+  <script src="pomodoro.js"></script>
   </head>
 
   <body>
@@ -12,9 +13,10 @@
     <h1>Simple Pomodoro app</h1>
   </header>
     <p>
-      A simple Pomodoro app written in vanilla Javascript
+      A Pomodoro app written in vanilla Javascript
     </p>
     <p id="timer">Time left:</p>
+    <button onclick="promptInput()">Start</button>
 
     <audio class="alarm" controls id="sound"> 
         <source 
@@ -23,7 +25,6 @@
         Your browser does not support the audio element
     </audio>
 
-    <script src="pomodoro.js"></script>
  </body>
 
 </html>
