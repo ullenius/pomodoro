@@ -37,12 +37,14 @@ function start(time) {
     const MINUTE_IN_MILLISECONDS = 60000;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
     const timer = document.getElementById("timer");
+    const alarm = document.getElementById("sound");
 
     function countdown() {
         console.log(counter); // debug
         if (counter === 0) {
             clearInterval(id);
-            printFinishMessage(timer);
+            soundAlarm();
+            printFinishMessage();
         } else {
             printTimeLeft(counter--, timer);
         }
@@ -62,6 +64,10 @@ function start(time) {
 
     function display(html) {
         timer.innerHTML = html;
+    }
+
+    function soundAlarm() {
+        alarm.play();
     }
     countdown();
 }
