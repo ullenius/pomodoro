@@ -48,7 +48,7 @@ function start(time) {
             soundAlarm();
             printFinishMessage();
         } else {
-            printTimeLeft(counter--, timer);
+            printTimeLeft(counter--);
         }
     }
 
