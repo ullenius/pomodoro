@@ -20,7 +20,7 @@ function getInput() {
 }
 
 function validateNumber(number) {
-    let result = Object.create(null);
+    const result = Object.create(null);
     result.valid = false;
     if (Number.isNaN(number)) {
         result.message = "Input is not a number!";
@@ -31,6 +31,7 @@ function validateNumber(number) {
     } else {
         result.valid = true;
     }
+    Object.freeze(result);
     return result;
 }
 
@@ -72,6 +73,11 @@ function start(time) {
         alarm.play();
     }
     countdown();
+}
+
+function mute(audio) {
+	audio.currentTime = 0;
+	audio.pause();
 }
 
 function strongTag(text) {
