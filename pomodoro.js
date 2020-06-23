@@ -14,29 +14,48 @@ function init() {
 	
 	const start = document.getElementById("start");
 	start.onclick = promptInput;
-	const muteButton = document.getElementById("mute");
-	muteButton.onclick = mute;
+	const muteButton = getMuteButton();
+	muteButton.onclick = function() {
+		console.log(alarm);
+		alarm.pause();
+		alarm.currentTime = 0;
+		
+	};
 }
 
 function getAlarm() {
-	const alarm = document.getElementById("sound");
-	return alarm;
+	return getObject("sound");
+}
+
+function getMuteButton() {
+	return getObject("mute");
+}
+
+function getObject(id) {
+	const object = document.getElementById(id);
+	return object;
 }
 
 function muteButtonVisible(state) {
 	
+	const muteButton = getMuteButton();
+	console.log(muteButton);
 	if (state === true) {
-		
+		muteButton.className = null;
 	}
-	
+	else if (state === false) {
+		muteButton.className = "alarm";
+	}
 }
 
 function showMuteButton() {
 	console.log("show mute button")
+	muteButtonVisible(true);
 }
 
 function hideMuteButton() {
 	console.log("hide mute button")
+	muteButtonVisible(false);
 }
 
 function promptInput() {
@@ -72,7 +91,7 @@ function validateNumber(number) {
 
 function start(time) {
     let counter = time;
-    const MINUTE_IN_MILLISECONDS = 60000;
+    const MINUTE_IN_MILLISECONDS = 10000;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
     const timer = document.getElementById("timer");
     const alarm = getAlarm();
@@ -108,11 +127,6 @@ function start(time) {
         alarm.play();
     }
     countdown();
-}
-
-function mute(audio) {
-	audio.pause();
-	audio.currentTime = 0;
 }
 
 function strongTag(text) {
