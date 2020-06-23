@@ -85,7 +85,7 @@ function validateNumber(number) {
 
 function start(time) {
     let counter = time;
-    const MINUTE_IN_MILLISECONDS = 10000;
+    const MINUTE_IN_MILLISECONDS = 60000;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
     const timer = document.getElementById("timer");
     const alarm = getAlarm();
