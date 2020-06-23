@@ -16,10 +16,8 @@ function init() {
 	start.onclick = promptInput;
 	const muteButton = getMuteButton();
 	muteButton.onclick = function() {
-		console.log(alarm);
 		alarm.pause();
 		alarm.currentTime = 0;
-		
 	};
 }
 
@@ -32,30 +30,26 @@ function getMuteButton() {
 }
 
 function getObject(id) {
-	const object = document.getElementById(id);
-	return object;
+	return document.getElementById(id);
+}
+
+function showMuteButton() {
+	muteButtonVisible(true);
+}
+
+function hideMuteButton() {
+	muteButtonVisible(false);
 }
 
 function muteButtonVisible(state) {
 	
 	const muteButton = getMuteButton();
-	console.log(muteButton);
 	if (state === true) {
-		muteButton.className = null;
+		muteButton.className = undefined;
 	}
 	else if (state === false) {
 		muteButton.className = "alarm";
 	}
-}
-
-function showMuteButton() {
-	console.log("show mute button")
-	muteButtonVisible(true);
-}
-
-function hideMuteButton() {
-	console.log("hide mute button")
-	muteButtonVisible(false);
 }
 
 function promptInput() {
