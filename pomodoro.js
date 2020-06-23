@@ -4,6 +4,41 @@
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
 "use strict";
 
+window.onload = init;
+
+function init() {
+	const alarm = getAlarm();
+	alarm.onplay = showMuteButton;
+	alarm.onended = hideMuteButton;
+	alarm.onpause = hideMuteButton;
+	
+	const start = document.getElementById("start");
+	start.onclick = promptInput;
+	const muteButton = document.getElementById("mute");
+	muteButton.onclick = mute;
+}
+
+function getAlarm() {
+	const alarm = document.getElementById("sound");
+	return alarm;
+}
+
+function muteButtonVisible(state) {
+	
+	if (state === true) {
+		
+	}
+	
+}
+
+function showMuteButton() {
+	console.log("show mute button")
+}
+
+function hideMuteButton() {
+	console.log("hide mute button")
+}
+
 function promptInput() {
     const input = getInput();
     const result = validateNumber(input);
@@ -40,7 +75,7 @@ function start(time) {
     const MINUTE_IN_MILLISECONDS = 60000;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
     const timer = document.getElementById("timer");
-    const alarm = document.getElementById("sound");
+    const alarm = getAlarm();
 
     function countdown() {
         console.log(counter); // debug
@@ -76,8 +111,8 @@ function start(time) {
 }
 
 function mute(audio) {
-	audio.currentTime = 0;
 	audio.pause();
+	audio.currentTime = 0;
 }
 
 function strongTag(text) {
