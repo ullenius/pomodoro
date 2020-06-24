@@ -4,6 +4,54 @@
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
 "use strict";
 
+window.onload = init;
+
+function init() {
+	const alarm = getAlarm();
+	alarm.onplay = showMuteButton;
+	alarm.onended = hideMuteButton;
+	alarm.onpause = hideMuteButton;
+	
+	const start = document.getElementById("start");
+	start.onclick = promptInput;
+	const muteButton = getMuteButton();
+	muteButton.onclick = function() {
+		alarm.pause();
+		alarm.currentTime = 0;
+	};
+}
+
+function getAlarm() {
+	return getObject("sound");
+}
+
+function getMuteButton() {
+	return getObject("mute");
+}
+
+function getObject(id) {
+	return document.getElementById(id);
+}
+
+function showMuteButton() {
+	muteButtonVisible(true);
+}
+
+function hideMuteButton() {
+	muteButtonVisible(false);
+}
+
+function muteButtonVisible(state) {
+	
+	const muteButton = getMuteButton();
+	if (state === true) {
+		muteButton.className = undefined;
+	}
+	else if (state === false) {
+		muteButton.className = "alarm";
+	}
+}
+
 function promptInput() {
     const input = getInput();
     const result = validateNumber(input);
@@ -26,7 +74,7 @@ function validateNumber(number) {
         result.message = "Input is not a number!";
     } else if (number <= 0) {
         result.message = "Length is too short";
-    } else if (number === Infinity) {
+    } else if (number === Infinity || number === -Infinity) {
         result.message = "Infinity not supported";
     } else {
         result.valid = true;
@@ -40,7 +88,7 @@ function start(time) {
     const MINUTE_IN_MILLISECONDS = 60000;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
     const timer = document.getElementById("timer");
-    const alarm = document.getElementById("sound");
+    const alarm = getAlarm();
 
     function countdown() {
         console.log(counter); // debug
@@ -73,11 +121,6 @@ function start(time) {
         alarm.play();
     }
     countdown();
-}
-
-function mute(audio) {
-	audio.currentTime = 0;
-	audio.pause();
 }
 
 function strongTag(text) {
