@@ -74,7 +74,7 @@ function validateNumber(number) {
         result.message = "Input is not a number!";
     } else if (number <= 0) {
         result.message = "Length is too short";
-    } else if (number === Infinity) {
+    } else if (number === Infinity || number === -Infinity) {
         result.message = "Infinity not supported";
     } else {
         result.valid = true;
