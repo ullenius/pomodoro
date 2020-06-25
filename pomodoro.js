@@ -44,12 +44,7 @@ function hideMuteButton() {
 function muteButtonVisible(state) {
 	
 	const muteButton = getMuteButton();
-	if (state === true) {
-		muteButton.className = undefined;
-	}
-	else if (state === false) {
-		muteButton.className = "alarm";
-	}
+	muteButton.className = (state === true) ? undefined : "alarm";
 }
 
 function promptInput() {
