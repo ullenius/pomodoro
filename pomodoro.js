@@ -13,12 +13,12 @@ function init() {
 	alarm.onpause = hideMuteButton;
 	
 	var start = document.getElementById("start");
-	start.onclick = promptInput;
+    start.addEventListener("click", promptInput);
 	var muteButton = getMuteButton();
-	muteButton.onclick = function mute() {
+	muteButton.addEventListener("click", function mute() {
 		alarm.pause();
 		alarm.currentTime = 0;
-	};
+	});
 }
 
 function getAlarm() {
@@ -79,9 +79,9 @@ function validateNumber(number) {
 }
 
 function start(time) {
-    var counter = time;
-    var MINUTE_IN_MILLISECONDS = 60000;
+    const MINUTE_IN_MILLISECONDS = 60000;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
+    var counter = time;
     var timer = document.getElementById("timer");
     var alarm = getAlarm();
 
@@ -119,5 +119,5 @@ function start(time) {
 }
 
 function strongTag(text) {
-    return "<strong>" + text + "</strong>";
+    return `<strong>${text}</strong>`;
 }
