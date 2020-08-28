@@ -1,21 +1,21 @@
+"use strict";
 // Simple Pomdoro app
 // takes user input and counts down
 // when timer hits 0 an alert pops up
 // @author Anosh D. Ullenius <anosh@anosh.se> 2019-2020
-"use strict";
 
 window.onload = init;
 
 function init() {
-	const alarm = getAlarm();
+	var alarm = getAlarm();
 	alarm.onplay = showMuteButton;
 	alarm.onended = hideMuteButton;
 	alarm.onpause = hideMuteButton;
 	
-	const start = document.getElementById("start");
+	var start = document.getElementById("start");
 	start.onclick = promptInput;
-	const muteButton = getMuteButton();
-	muteButton.onclick = function() {
+	var muteButton = getMuteButton();
+	muteButton.onclick = function mute() {
 		alarm.pause();
 		alarm.currentTime = 0;
 	};
@@ -43,13 +43,13 @@ function hideMuteButton() {
 
 function muteButtonVisible(state) {
 	
-	const muteButton = getMuteButton();
+	var muteButton = getMuteButton();
 	muteButton.className = (state === true) ? undefined : "alarm";
 }
 
 function promptInput() {
-    const input = getInput();
-    const result = validateNumber(input);
+    var input = getInput();
+    var result = validateNumber(input);
     if (result.valid === true) {
         start(input);
     } else {
@@ -58,7 +58,7 @@ function promptInput() {
 }
 
 function getInput() {
-    const input = prompt("Please enter length of pomodoro in minutes:");
+    var input = prompt("Please enter length of pomodoro in minutes:");
     return Math.trunc(input);
 }
 
@@ -79,11 +79,11 @@ function validateNumber(number) {
 }
 
 function start(time) {
-    let counter = time;
-    const MINUTE_IN_MILLISECONDS = 60000;
+    var counter = time;
+    var MINUTE_IN_MILLISECONDS = 60000;
     const id = setInterval(countdown, MINUTE_IN_MILLISECONDS);
-    const timer = document.getElementById("timer");
-    const alarm = getAlarm();
+    var timer = document.getElementById("timer");
+    var alarm = getAlarm();
 
     function countdown() {
         console.log(counter); // debug
@@ -97,14 +97,14 @@ function start(time) {
     }
 
     function printTimeLeft(number) {
-        const displayTime = (number < 1) ? "< 1" : number;
-        const message = "Time left: " + strongTag(displayTime) + " minute(s)";
+        var displayTime = (number < 1) ? "< 1" : number;
+        var message = `Time left: ${strongTag(displayTime)}  minute(s)`;
         display(message);
     }
 
     function printFinishMessage() {
         alert("Time is up! Time for a break :)");
-        const message = strongTag("Time is up");
+        var message = strongTag("Time is up");
         display(message);
     }
 
