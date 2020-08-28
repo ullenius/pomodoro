@@ -7,44 +7,44 @@
 window.onload = init;
 
 function init() {
-	var alarm = getAlarm();
-	alarm.onplay = showMuteButton;
-	alarm.onended = hideMuteButton;
-	alarm.onpause = hideMuteButton;
-	
-	var start = document.getElementById("start");
+    var alarm = getAlarm();
+    alarm.onplay = showMuteButton;
+    alarm.onended = hideMuteButton;
+    alarm.onpause = hideMuteButton;
+
+    var start = document.getElementById("start");
     start.addEventListener("click", promptInput);
-	var muteButton = getMuteButton();
-	muteButton.addEventListener("click", function mute() {
-		alarm.pause();
-		alarm.currentTime = 0;
-	});
+    var muteButton = getMuteButton();
+    muteButton.addEventListener("click", function mute() {
+        alarm.pause();
+        alarm.currentTime = 0;
+    });
 }
 
 function getAlarm() {
-	return getObject("sound");
+    return getObject("sound");
 }
 
 function getMuteButton() {
-	return getObject("mute");
+    return getObject("mute");
 }
 
 function getObject(id) {
-	return document.getElementById(id);
+    return document.getElementById(id);
 }
 
 function showMuteButton() {
-	muteButtonVisible(true);
+    muteButtonVisible(true);
 }
 
 function hideMuteButton() {
-	muteButtonVisible(false);
+    muteButtonVisible(false);
 }
 
 function muteButtonVisible(state) {
-	
-	var muteButton = getMuteButton();
-	muteButton.className = (state === true) ? undefined : "alarm";
+
+    var muteButton = getMuteButton();
+    muteButton.className = (state === true) ? undefined : "alarm";
 }
 
 function promptInput() {
